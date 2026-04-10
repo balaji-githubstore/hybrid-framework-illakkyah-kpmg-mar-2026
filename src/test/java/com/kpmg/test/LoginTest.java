@@ -25,11 +25,11 @@ public class LoginTest extends AutomationWrapper {
 
 	@Test
 	public void invalidLoginTest() {
-		page.locator("xpath=//input[@id='authUser']").fill("admin");
+		page.locator("xpath=//input[@id='authUser']").fill("admin123");
 		page.locator("xpath=//input[@id='clearPass']").fill("admin123");
 		page.locator("xpath=//select[@name='languageChoice']").selectOption(new SelectOption().setValue("18"));
 		page.locator("xpath=//button[@id='login-button']").click();
 		String actualError=page.locator("xpath=//p[contains(text(),'Invalid username')]").innerText(); 
-		Assert.assertTrue(actualError.contains("Invalid username233"),"Actual message does not contain expected text. Actual message -"+actualError);
+		Assert.assertTrue(actualError.contains("Invalid username"),"Actual message does not contain expected text. Actual message -"+actualError);
 	}
 }
