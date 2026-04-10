@@ -22,13 +22,13 @@ public class ZDemo1Test {
 		data[1][1] = "saul123";
 
 		data[2][0] = "kim";
-		data[2][1] = "kim123";
+//		data[2][1] = "kim123";
 		
 		return data;
 	}
 
 	@Test(dataProvider = "getValidData")
 	public void validTest(String username, String password) {
-		System.out.println("valid login" + username + password);
+		System.out.println("valid login" + username + password.toLowerCase());
 	}
 }
