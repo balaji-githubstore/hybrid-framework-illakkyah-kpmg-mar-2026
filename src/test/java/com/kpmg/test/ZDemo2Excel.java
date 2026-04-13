@@ -12,7 +12,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class ZDemo2Excel {
 
 	public static void main(String[] args) throws IOException {
-
+//
 		FileInputStream file = new FileInputStream("src/test/resources/test-data/opem-emr-data.xlsx"); // new
 																										// FileNotFoundException("")
 
@@ -20,15 +20,20 @@ public class ZDemo2Excel {
 		XSSFSheet sheet = book.getSheet("validLoginTest");
 		DataFormatter format=new DataFormatter();
 		
-		String value= format.formatCellValue(sheet.getRow(1).getCell(2));
-		System.out.println(value);
+		int rowCount=sheet.getPhysicalNumberOfRows();
+		int cellCount=sheet.getRow(0).getPhysicalNumberOfCells();
 		
-		//1. write logic to print each and every cell value (nested for loop)
+
+		Object[][] data=new Object[rowCount-1][cellCount];
 		
-		
-		//2. Create two dimensional array based on number of testcase and then number of cells (parameters)
-//		Object[][] data=new Object[3][4];
-		
+		for(int r=1;r<rowCount;r++)
+		{
+			for(int c=0;c<cellCount;c++)
+			{
+				data[r-1][c]=format.formatCellValue(sheet.getRow(r).getCell(c));
+			}
+		}
+
 		book.close();
 		file.close();
 

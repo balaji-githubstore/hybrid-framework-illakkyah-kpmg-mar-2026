@@ -14,7 +14,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  */
 public class LoginTest extends AutomationWrapper {
 
-	@Test(dataProvider = "loginCredentials",dataProviderClass = DataSource.class)
+	@Test(dataProvider = "validLoginData",dataProviderClass = DataSource.class)
 	public void validLoginTest(String username,String password,String languageValue,String expectedValue) {
 		page.locator("xpath=//input[@id='authUser']").fill(username);
 		page.locator("xpath=//input[@id='clearPass']").fill(password);

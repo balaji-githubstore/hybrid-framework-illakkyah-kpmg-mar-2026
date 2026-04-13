@@ -7,7 +7,7 @@ import org.testng.annotations.DataProvider;
 public class DataSource {
 	
 	@DataProvider
-	public Object[][] loginCredentials() {	
+	public Object[][] validLoginData() {	
 
 		Object[][] loginDetails = new Object[2][4];
 		
@@ -23,5 +23,15 @@ public class DataSource {
 
 		return loginDetails;
 	}
+	
+//	@DataProvider
+//	public Object[][] invalidLoginData() {	
+//
+//		Object[][] loginDetails = {
+//				{"admin123","admin123","18","Invalid username"},
+//				{"physician123","physician123","18","Invalid username"}
+//		};
+//		return loginDetails;
+//	}
 
 }
