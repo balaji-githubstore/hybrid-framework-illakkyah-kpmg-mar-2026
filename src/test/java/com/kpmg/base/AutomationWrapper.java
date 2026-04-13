@@ -5,14 +5,14 @@ import org.testng.annotations.BeforeMethod;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
+import com.microsoft.playwright.BrowserType.LaunchOptions;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
-import com.microsoft.playwright.BrowserType.LaunchOptions;
 
 public class AutomationWrapper {
 	private Playwright playwright;
 	private Browser browser;
-	private	BrowserContext context;
+	private BrowserContext context;
 	protected Page page;
 
 	@BeforeMethod
