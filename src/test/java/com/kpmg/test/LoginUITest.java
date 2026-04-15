@@ -19,4 +19,11 @@ public class LoginUITest extends AutomationWrapper {
 		Assert.assertTrue(actualText.contains("open-source Electronic Health Record and Medical Practice Management"),
 				"Asserting the header: " + actualText); // expect true
 	}
+	
+	@Test
+	public void placeholderTest()
+	{
+		String actualUsername=page.locator("xpath=//input[@id='authUser']").getAttribute("placeholder");
+		Assert.assertEquals(actualUsername, "Username");
+	}
 }
