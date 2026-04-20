@@ -1,6 +1,7 @@
 package com.kpmg.pages;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.SelectOption;
 
 public class LoginPage {
 
@@ -22,9 +23,13 @@ public class LoginPage {
 		page.locator(passwordLocator).fill(password);
 	}
 
-	// selectLanguage(String languageValue)
+	public void selectLanguage(String langValue) {
+		page.locator("xpath=//select[@name='languageChoice']").selectOption(new SelectOption().setValue(langValue));
+	}
 
-	// clickOnLogin()
+	public void clickOnLogin() {
+		page.locator("xpath=//button[@id='login-button']").click();
+	}
 
 	public String getInvalidErrorMessage() {
 		return page.locator(errorLocator).innerText();

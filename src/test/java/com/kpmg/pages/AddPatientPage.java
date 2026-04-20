@@ -2,11 +2,11 @@ package com.kpmg.pages;
 
 import com.microsoft.playwright.Page;
 
-public class PatientPage {
+public class AddPatientPage {
 
 	private Page page;
 
-	public PatientPage(Page page) {
+	public AddPatientPage(Page page) {
 		this.page = page;
 	}
 
