@@ -1,41 +1,45 @@
 package com.kpmg.pages;
 
+import com.kpmg.base.PlaywrightKeywords;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.SelectOption;
 
-public class LoginPage {
+public class LoginPage extends PlaywrightKeywords {
 
 	private String usernameLocator = "xpath=//input[@id='authUser']";
 	private String passwordLocator = "xpath=//input[@id='clearPass']";
 	private String errorLocator = "xpath=//p[contains(text(),'Invalid username')]";
+	private String languageLocator = "xpath=//select[@name='languageChoice']";
+	private String loginLocator = "xpath=//button[@id='login-button']";
 
 	private Page page;
 
 	public LoginPage(Page page) {
+		super(page);
 		this.page = page;
 	}
 
 	public void enterUsername(String username) {
-		page.locator(usernameLocator).fill(username);
+		super.sendTextToElement(usernameLocator, username);
 	}
 
 	public void enterPassword(String password) {
-		page.locator(passwordLocator).fill(password);
+		sendTextToElement(passwordLocator, password);
 	}
 
 	public void selectLanguage(String langValue) {
-		page.locator("xpath=//select[@name='languageChoice']").selectOption(new SelectOption().setValue(langValue));
+		super.selectElementByValue(langValue, langValue);
 	}
 
 	public void clickOnLogin() {
-		page.locator("xpath=//button[@id='login-button']").click();
+		super.clickOnElement(loginLocator);
 	}
 
 	public String getInvalidErrorMessage() {
-		return page.locator(errorLocator).innerText();
+		return super.getInnerTextFromElement(errorLocator);
 	}
 
 	public String getUsernamePlaceholder() {
-		return page.locator(usernameLocator).getAttribute("placeholder");
+		return super.getAttributeValueFromElement(usernameLocator, "placeholder");
 	}
 }
