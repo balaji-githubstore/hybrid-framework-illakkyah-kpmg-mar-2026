@@ -12,4 +12,6 @@ public class AddPatientPage extends PlaywrightKeywords {
 		this.page = page;
 	}
 
+	
+	
 }

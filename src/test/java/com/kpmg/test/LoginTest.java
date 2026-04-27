@@ -15,30 +15,29 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  */
 public class LoginTest extends AutomationWrapper {
 
-	@Test(dataProvider = "commonDataProvider", dataProviderClass = DataSource.class)
+	@Test(dataProvider = "commonDataProvider", dataProviderClass = DataSource.class, groups = { "regression", "smoke" })
 	public void validLoginTest(String username, String password, String languageValue, String expectedValue) {
 		LoginPage login = new LoginPage(page);
 		login.enterUsername(username);
 		login.enterPassword(password);
-		
+
 		page.locator("xpath=//select[@name='languageChoice']").selectOption(new SelectOption().setValue(languageValue));
 		page.locator("xpath=//button[@id='login-button']").click();
-		
-		
-		MainPage main=new MainPage(page);
+
+		MainPage main = new MainPage(page);
 //		assertThat(page.locator("xpath=//span[text()='Calendar']")).hasText(expectedValue);
 		Assert.assertEquals(main.getCalendarText(), expectedValue);
 	}
 
-	@Test(dataProvider = "commonDataProvider", dataProviderClass = DataSource.class)
+	@Test(dataProvider = "commonDataProvider", dataProviderClass = DataSource.class, groups = { "regression" })
 	public void invalidLoginTest(String username, String password, String languageValue, String expectedError) {
 		LoginPage login = new LoginPage(page);
 		login.enterUsername(username);
 		login.enterPassword(password);
-		
+
 		page.locator("xpath=//select[@name='languageChoice']").selectOption(new SelectOption().setValue(languageValue));
 		page.locator("xpath=//button[@id='login-button']").click();
-		
+
 		String actualError = login.getInvalidErrorMessage();
 		Assert.assertTrue(actualError.contains(expectedError),
 				"Actual message does not contain expected text. Actual message -" + actualError);

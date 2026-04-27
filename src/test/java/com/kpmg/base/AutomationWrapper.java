@@ -2,6 +2,8 @@ package com.kpmg.base;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.microsoft.playwright.Browser;
 import com.microsoft.playwright.BrowserContext;
@@ -15,18 +17,24 @@ public class AutomationWrapper {
 	private BrowserContext context;
 	protected Page page;
 
-	@BeforeMethod
-	public void setup() {
+	@BeforeMethod(alwaysRun = true)
+	@Parameters({ "browser" })
+	public void setup(@Optional("chrome") String browserName) {
 
 		playwright = Playwright.create();
-		browser = playwright.chromium().launch(new LaunchOptions().setHeadless(false).setChannel("chrome"));
+
+		if (browserName.equalsIgnoreCase("firefox")) {
+			browser = playwright.firefox().launch(new LaunchOptions().setHeadless(false).setChannel(browserName));
+		} else {
+			browser = playwright.chromium().launch(new LaunchOptions().setHeadless(false).setChannel(browserName));
+		}
 		context = browser.newContext();
 		page = context.newPage();
 
 		page.navigate("http://demo.openemr.io/b/openemr/");
 	}
 
-	@AfterMethod
+	@AfterMethod(alwaysRun = true)
 	public void teardown() {
 		playwright.close();
 	}
