@@ -2,8 +2,10 @@ package com.kpmg.test;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
+import static org.hamcrest.MatcherAssert.assertThat; 
+import static org.hamcrest.Matchers.*;
 import com.kpmg.base.AutomationWrapper;
+
 
 public class LoginUITest extends AutomationWrapper {
 
@@ -25,5 +27,6 @@ public class LoginUITest extends AutomationWrapper {
 	{
 		String actualUsername=page.locator("xpath=//input[@id='authUser']").getAttribute("placeholder");
 		Assert.assertEquals(actualUsername, "Username");
+		assertThat("Asserting the username placeholder", actualUsername, equalToIgnoringCase("Username"));
 	}
 }
